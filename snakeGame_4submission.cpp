@@ -22,10 +22,13 @@ void initScreen()   //function to initialize screen.
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE); // brings console handle (pre-defined class in windows.h )
     CONSOLE_SCREEN_BUFFER_INFO csbi; // brings buffering info 
     GetConsoleScreenBufferInfo(hConsole, &csbi);
+    //after this csbi will contain console's screen buffer info 
 
     //getting console width and height using above function. 
-    console_height = csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
+    console_height = csbi.srWindow.Bottom - csbi.srWindow.Top + 1; 
     console_width = csbi.srWindow.Right - csbi.srWindow.Left + 1;
+    // thee two lines will calculate console width and height by subtracting left position from right and top from bottom respectively and adding +1 for 0 based indexing 
+
 }
 
 struct Point{ // defining datatype for point/dots/food displayed on console. 
@@ -233,7 +236,7 @@ int main(){
     
     // calling in it screen to fetch console properties : 
     initScreen();
-    Board *board = new Board();
+    Board *board = new Board(); // this dynamically allocates memory for a new instance of the Board class  and initializes a pointer board to point to that memory location.
     while(board->update()){
         board->get_input();
         board->draw();
